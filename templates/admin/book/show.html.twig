@@ -1,0 +1,74 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    <h1>Book</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ book.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ book.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{  asset('uploads/images/'~ book.image)}}" height="100"></td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ book.type }}</td>
+            </tr>
+            <tr>
+                <th>Yazar</th>
+                <td>{{ book.Yazar }}</td>
+            </tr>
+            <tr>
+                <th>Yayinci</th>
+                <td>{{ book.Yayinci }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ book.Year ? book.Year|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fiyat</th>
+                <td>{{ book.fiyat }}</td>
+            </tr>
+            <tr>
+                <th>SFiyat</th>
+                <td>{{ book.sFiyat }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ book.status }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ book.createdAt ? book.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ book.updatedAt ? book.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_book_index') }}"class="btn btn-primary m-t">back to list</a>
+
+    <a href="{{ path('admin_book_edit', {'id': book.id}) }}"class="btn btn-primary m-t">edit</a>
+
+    {{ include('admin/book/_delete_form.html.twig') }}
+{% endblock %}

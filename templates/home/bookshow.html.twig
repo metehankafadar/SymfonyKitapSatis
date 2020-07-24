@@ -1,0 +1,209 @@
+
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ book.title }} {% endblock %}
+{% block keywords %}{{ book.keywords }} {% endblock %}
+{% block description %}{{ book.description }} {% endblock %}
+{% block sidebar %}{{ include('home/sidebar.html.twig') }} {% endblock %}
+{% block body %}
+    <div class="product-details"><!--product-details-->
+        <div class="col-sm-5">
+
+            <div class="view-product" id="similar-product" data-ride="carousel">
+                <img src="{{ asset('uploads/images/'~ book.image)}}" style="height: 300px" alt="">
+                <h3>ZOOM</h3>
+            </div>
+
+        </div>
+
+
+        <br> <br>
+        <div class="col-sm-7">
+            <div class="product-information"><!--/product-information-->
+                <img src="images/product-details/new.jpg" class="newarrival" alt="">
+                <h2>{{ book.title }}</h2>
+                <p>{{ book.type }}</p>
+                <img src="images/product-details/rating.png" alt="">
+
+                <span>
+
+									<span>{{ book.sFiyat }}</span>
+									<label>{{ book.Yazar }}</label>
+                                        <form class="form-group" name="shopcart" action="{{ path('shopcart_new') }}" method="post">
+									<input type="number" value="1" name="quantity" >
+                                    <input type="hidden" name="shopcart[bookid]" id="shopcart_bookid" value="{{ book.id }}">
+                                     <input type="hidden" name="token" value="{{ csrf_token('add-item') }}">
+									<button type="submit" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+                                               </form>
+
+                </span>
+
+
+                <p><b>Availability:</b> {{book.status}}</p>
+                <p><b>Yayıncı</b> {{ book.Yayinci }}</p>
+                <p><b>Brand:</b> {{ book.Yazar }}</p>
+                <p><b>Brand:</b> </p>
+                <a href=""><img src="images/product-details/share.png" class="share img-responsive" alt=""></a>
+            </div><!--/product-information-->
+        </div>
+
+
+    </div>
+        <div class="span5" >
+            <div class="category-tab shop-details-tab"><!--category-tab-->
+                <div class="col-sm-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#details" data-toggle="tab">Kitap Detail</a></li>
+                        <li class=""><a href="#companyprofile" data-toggle="tab">Image Galeri</a></li>
+                        <li class=""><a href="#reviews" data-toggle="tab">Comments (5)</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="details">
+
+
+                                        {{ book.detail |raw }}
+
+                    </div>
+
+                    <div class="tab-pane fade" id="companyprofile">
+                        <div class="col-sm-10">
+                            <section id="slider"><!--slider-->
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#slider-carousel" data-slide-to="0" class="Active"></li>
+                                                    {% for rs in images %}
+                                                        <li data-target="#slider-carousel" data-slide-to="{{ loop.index }}"></li>
+                                                    {% endfor %}
+                                                </ol>
+                                                {% set count=0 %}
+                                                {% for rs in images %}
+                                                {% set count=count+1 %}
+
+                                                {% if count==1 %}
+                                                <div class="carousel-inner">
+                                                    <div class="item active">
+                                                        <div class="col-sm-6">
+                                                            <h1><span>E</span>-SHOPPER</h1>
+                                                            <h2>{{ rs.title }}</h2>
+                                                            <p> </p>
+                                                            <button type="button" class="btn btn-default get">Get it now</button>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <a href="{{ path('book_show_a',{'id':rs.id}) }}">
+                                                                <img src="{{  asset('uploads/images/'~ rs.image)}}" class="girl img-responsive" style="width: 484px; height: 441px;" alt="" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    {% else %}
+
+                                                        <div class="item">
+                                                            <div class="col-sm-6">
+                                                                <h1><span>E</span>-SHOPPER</h1>
+                                                                <h2>{{ rs.title }}</h2>
+                                                                <p> </p>
+                                                                <button type="button" class="btn btn-default get">Get it now</button>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <a href="{{ path('book_show_a',{'id':rs.id}) }}">
+                                                                    <img src="{{  asset('uploads/images/'~ rs.image)}}" class="girl img-responsive" style="width: 484px; height: 441px;" alt="" />
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% endfor %}
+
+
+                                                </div>
+
+                                                <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                                <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </section><!--/slider-->
+                            </div>
+
+                    </div>
+
+
+                    <div class="tab-pane fade" id="reviews">
+                        <div class="col-sm-12">
+                            {% for rs in comments %}
+                            <ul>
+                                <li><i class="fa fa-mail-forward"></i>{{rs.subject}}</li>
+                                <li><i class="fa fa-star"></i>{{ rs.rate }}</li>
+                            </ul>
+                                <h3><p>{{rs.comment}}</p></h3>
+                            {% endfor %}
+
+                            <div class="col-sm-8">
+                                <div class="contact-form">
+                                    <h2 class="title text-center">Get In Touch</h2>
+                                    <div class="status alert alert-success" style="display: none"></div>
+                                    {{ include('messages.html.twig') }}
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <form id="main-contact-form" action="{{ path('user_new_comment',{'id' :book.id}) }}" class="contact-form row" name="comment" method="post">
+                                        <div class="form-group col-md-6">
+                                            <input type="text" id="comment_subject" name="comment[subject]" maxlength="75" class="form-control" required="required" placeholder="Subject">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <select id="comment_rate" name="comment[rate]" class="form-control">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                            <textarea id="comment_comment" name="comment[comment]" maxlength="255" required="required" class="form-control" rows="8" placeholder="Comment"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <input type="hidden" name="token" value="{{csrf_token('comment')}}" />
+                                            <input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+                                        </div>
+                                    </form>
+                                    {%  else %}
+
+                                        <li>
+                                            <a href="/loginuser"><i class="fa fa-lock"></i> Mesaj atabilmeniz için Üye olmalısınız</a>
+                                        </li>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Book index{% endblock %}
+
+{% block body %}
+    <h1>Book index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Image Ekle</th>
+                <th>User</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.catname }}</td>
+                <td>{{ book.title }}</td>
+                <td><img src="{{  asset('uploads/images/'~ book.image)}}" height="40"></td>
+                <td>
+                    <a href="javascript:window.open('{{ path('admin_image_new',{'id': book.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizeable=no,width=900,height=600');">
+                    <img src="{{  asset('assets/admin/img')}}/uploadimg.png" height="40">
+                     </a>
+                </td>
+                <td><a href="{{ path('admin_user_show', {'id': book.userid}) }}"> {{ book.name }} {{ book.surname }}</a></td>
+                <td>{{ book.status }}</td>
+                <td>
+                    <a href="{{ path('admin_book_show', {'id': book.id}) }}"class="btn btn-primary m-t">show</a>
+                    <a href="{{ path('admin_book_edit', {'id': book.id}) }}"class="btn btn-primary m-t">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_book_new') }}"class="btn btn-primary m-t">Create new</a>
+{% endblock %}

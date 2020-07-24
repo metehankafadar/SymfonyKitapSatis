@@ -1,0 +1,47 @@
+
+{% block sidebar %}{{ include('home/sidebar.html.twig') }} {% endblock %}
+<div class="col-sm-5 clearfix">
+    <div class="bill-to">
+        <p>Bill To</p>
+        <div class="form-one">
+            <form name="orders" method="post" class="form-group">
+                Ödenecek Tutar
+                 <input type="text" placeholder="Ödenecek Tutar" id="orders_amount" name="orders[amount]" value="{{ total }} tl">
+                Mail Adresiniz
+                <input type="text" placeholder="Email" value="{{ app.user.email }}">
+                Adınız Soyadınız
+                <input type="text" placeholder="First Name *" id="orders_name" name="orders[name]" value="{{ app.user.name }} {{ app.user.surname }}">
+                Adresiniz:
+                <input type="text" placeholder="Adres bilgileriniz" id="orders_address" name="orders[address]"  value="{{app.user.address}}" max="150">
+                Şehriniz:
+                <input type="text" placeholder="Şehir" id="orders_city" name="orders[city]"  value="{{app.user.city}}" >
+                Tel no:
+                <input type="text" placeholder="Tel no" id="orders_city" name="orders[city]"  value="{{app.user.phone}}">
+                <input type="hidden" name="token" value="{{ csrf_token('form-order') }}">
+                <input type="submit" class="btn btn-dark">
+        <BR>
+
+        KREDİ KARTI BİLGİLERİNİZ:
+            ADI SOYADI
+            <input type="text" placeholder="İsim Soyisim" >
+            KART NUMARASI
+            <input type="text" placeholder="Kart NO"  max="16">
+            Son Kullanma Tarihi
+            <input type="text" placeholder="Son Kullanma tarihi"  max="5">
+            Güvenlik kodu
+            <input type="text" placeholder="Güvenlik kodu" max="3">
+
+        </form>
+    </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+

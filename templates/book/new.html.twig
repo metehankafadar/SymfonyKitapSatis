@@ -1,0 +1,28 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }} Comments{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                {{ include('user/usermenu.html.twig') }}
+                <div class="blog-post-area">
+                    <h2 class="title text-center">User Comments List</h2>
+                    <div class="single-blog-post">
+                        <div class="post-meta">
+
+
+                            <h1>Create new Book</h1>
+
+                            {{ include('book/_form.html.twig') }}
+
+
+
+
+                            <a href="{{ path('user_book_index') }}" class="btn">back to list</a>
+                        </div>
+                    </div>
+                </div></div></div></section>
+
+{% endblock %}

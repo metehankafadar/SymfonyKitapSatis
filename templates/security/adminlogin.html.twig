@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include('admin/head.html.twig') %}
+    <title>INSPINIA | Login</title>
+
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+
+            <h1 class="logo-name">IN+</h1>
+
+        </div>
+        <h3>Welcome to IN+</h3>
+        <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+            <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+        </p>
+        <p>Login in. To see it in action.</p>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h3 class="h3 mb-3 font-weight-normal">Please sign in</h3>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+    </div>
+</div>
+
+<script src="{{ asset('assets') }}/admin/plugins/js/jquery-3.1.1.min.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/js/popper.min.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/js/bootstrap.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{{ asset('assets') }}/admin/plugins/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+</body>
+
+</html>
+

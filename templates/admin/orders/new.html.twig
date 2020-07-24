@@ -1,0 +1,41 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Orders{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Userid</th>
+            <th>Amount</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Shipinfo</th>
+            <th>Status</th>
+            <th>Updated_at</th>
+            <th>Created_at</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cart in cart %}
+            <tr>
+                <td>{{ cart.title }}</td>
+                <td>{{ cart.s_fiyat }}</td>
+                <td>{{ cart.quantity }}</td>
+                    <a href="{{ path('admin_orders_show', {'id': cart.id}) }}">show</a>
+                    <a href="{{ path('admin_orders_edit', {'id': cart.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

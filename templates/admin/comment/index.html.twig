@@ -1,0 +1,46 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Comment index{% endblock %}
+
+{% block body %}
+    <h1>Comment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Book</th>
+                <th>Created_at</th>
+                <th>Rate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.subject }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.status }}</td>
+                <td><a href="{{ path('admin_user_show', {'id': comment.userid}) }}"> {{ comment.name}} {{ comment.surname}}</a></td>
+                <td><a href="{{ path('book_show_a', {'id': comment.bookid}) }}">{{ comment.title}}</td>
+                <td>{{ comment.created_at}}</td>
+                <td>{{ comment.rate }}</td>
+                <td>
+                    <a href="{{ path('admin_comment_show', {'id': comment.id}) }}" class="btn btn-dark">show</a>
+                    <a href="{{ path('admin_comment_edit', {'id': comment.id}) }}" class="btn btn-success">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

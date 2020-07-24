@@ -1,0 +1,22 @@
+{% for label, flashes in app.session.flashbag.all %}
+    {% for flash in flashes %}
+        {% if (label =='success') %}
+        <div class="form-group col-md-12">
+            <input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+            <h4><i class="icon checkbox-success"></i> Başarılı </h4>
+            {{ flash|raw }}
+        </div>
+        {% elseif (label=='error') %}
+        <div class="alert-error"><strong>Hata </strong> {{ flash|raw }}  </div>
+
+        {% elseif (label=='info') %}
+        <div class="alert-error"><strong>Hata </strong> {{ flash|raw }}  </div>
+
+        {% elseif (label=='warning') %}
+        <div class="alert-danger">
+            <button type="button" class="close" >x</button>
+            <h4><i class="icon alert-danger"></i> Uyarı! </h4>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}

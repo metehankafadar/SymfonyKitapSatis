@@ -1,0 +1,99 @@
+
+{% extends 'homebase.html.twig' %}
+{% block keywords %}{{book.keywords}}{% endblock %}
+{% block description %}{{book.description}} {% endblock %}
+{% block title %}{{ app.user.name }} Comments{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                {{ include('user/usermenu.html.twig') }}
+                <div class="blog-post-area">
+                    <h2 class="title text-center">User Comments List</h2>
+                    <div class="single-blog-post">
+                        <div class="post-meta">
+
+
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ book.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>{{ book.title }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Keywords</th>
+                                    <td>{{ book.keywords }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{ book.description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Image</th>
+                                    <td>{{ book.image }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Type</th>
+                                    <td>{{ book.type }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Yazar</th>
+                                    <td>{{ book.Yazar }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Yayinci</th>
+                                    <td>{{ book.Yayinci }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Year</th>
+                                    <td>{{ book.Year ? book.Year|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Fiyat</th>
+                                    <td>{{ book.fiyat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>SFiyat</th>
+                                    <td>{{ book.sFiyat }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>{{ book.status }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Created_at</th>
+                                    <td>{{ book.createdAt ? book.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Updated_at</th>
+                                    <td>{{ book.updatedAt ? book.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Detail</th>
+                                    <td>{{ book.detail }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Userid</th>
+                                    <td>{{ book.userid }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <a href="{{ path('user_book_index') }}" class="btn btn-primary m-t">back to list</a>
+
+                            <a href="{{ path('user_book_edit', {'id': book.id}) }}" class="btn btn-primary m-t">edit</a>
+
+
+
+
+                        </div>
+                    </div>
+                </div></div></div></section>
+
+{% endblock %}
+
